@@ -4,8 +4,32 @@
 
 \begin{document}
 
-\emph{No se ha llegado a completar este punto.}
-
+Para analizarla tomamos como referencia los pasos indicados en el punto \texttt{P1.1}.
+\begin{description}
+    \item[1.] Procesar el archivo puede asumirse una complejidad $O(E)$: consiste en insertar como mucho
+        2 sublistas en una lista (la de adyacencias) y un arco como elemento de una de esas sublistas,
+        por cada arco ($E$). Espacialmente, es $O(V+E)$
+    \item[2.] \textbf{Conversión de grafo de flujo}. Se debe iterar cada arco realizando una inserción
+    y una modificación (pueden presumirse $O(1)$ cada una). Por lo tanto, temporalmente sería $O(E)$.
+    Si bien aumenta su tamaño, se duplican las aristas, por lo que espacialemente sigue siendo $O(V+E)$.
+    \item[3.] Edmonds-Karp tiene O(VE) operaciones de emph{presumiblemente} O(E), donde:\begin{enumerate}
+        \item[3.b] Se aplica BFS, nuestra implementación de BFS es $O(V+E)$ temporalmente (iteramos dos veces
+        por nodo $V$, y recorremos una vez cada arco $E$) y $O(V)$ espacialmente
+            (V para nodo anterior, V para nodos a visitar y V para el camino).
+        \item[3.1] Cuello de botella, es una simple iteración por cada nodo del camino, almacenando el mínimo.
+        $O(V)$ temporalmente, $O(1)$ espacialmente.
+        \item[3.2] Aumentar el camino, nuevamente una iteración por cada nodo del camino. $O(V)$ temporalmente.
+    \end{enumerate}
+    \item[4.] \textbf{Computar subgrupos A, B y el corte}. Es un BFS, que aunque puede terminar antes
+        podría ser que B sea el sumidero y por lo tanto seguiría siendo temporalmente $O(V+E)$.
+        Espacialmente tenemos que $A+B=V$, y que $corte \leq E$, por lo tanto es $O(V+E)$.
+    \item[5] \textbf{Convertir resultado}: se debe recorrer cada arco para convertirlo e imprimirlo.
+    Es temporalmente $O(E)$, y como se necesita convertir uno por uno también lo es espacialmente.
+\end{description}
+En nuestra implementación el impacto en la complejidad temporal sigue dado por Edmonds-Karp, $O(VE^2)$,
+pudiendo descartarse las operaciones $O(V+E)$, $O(V)$ y $O(E)$. Con respecto \textbf{al problema original}, la complejidad temporal es $O(VE^2)$ siendo $V$ la cantidad
+de aeropuetos y $E$ la de viajes.
+Espacialmente, en el momento de mayor consumo hay 2 instancias de $O(V+E)$ por lo que pertenece a esa complejidad.
 
 % FIN DEL DOCUMENTO (SECCIÓN P1.5)
 % NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO
