@@ -4,7 +4,7 @@ class ArcoDirecto:
             raise Exception("El flujo supera a la capacidad")
         self._capacidad = capacidad
         self._flujo = flujo
-        self._inverso = {}
+        self._inverso = {capacidad:0}
 
     def capacidad(self):
         return self._capacidad
