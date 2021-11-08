@@ -95,6 +95,6 @@ class TestLector(unittest.TestCase):
         self.assertEqual(list(grafo.arcos()),[
             (0,1, 5), (0,3,10), (1,8,5), (2,1,5), (2,5,8), (3,2, 2),
             (3,4,10), (4,8,10), (5,6,9), (6,8,8), (7,0,5), (7,2,20)])
-
+        
 if __name__ == '__main__':
     unittest.main()
