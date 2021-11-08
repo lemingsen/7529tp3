@@ -59,5 +59,13 @@ class TestLector(unittest.TestCase):
         self.assertEqual(grafo.idDeNodoAlias("B"),1)
         self.assertEqual(list(grafo.arcos()),[(0,1,5)])
 
+def test_BA_menos5(self):
+        rutaArchivo = self.pathArchivo("entradas/test_BA_menos5.txt")
+        grafo = Lector(rutaArchivo).grafo
+
+        self.assertEqual(grafo.idDeNodoAlias("B"),0)
+        self.assertEqual(grafo.idDeNodoAlias("A"),1)
+        self.assertEqual(list(grafo.arcos()),[(0,1,-5)])
+
 if __name__ == '__main__':
     unittest.main()
