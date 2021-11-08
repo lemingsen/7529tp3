@@ -14,6 +14,8 @@ class Vuelos:
 
     def imprimir(self):
         """Imprime el resultado."""
+        print("Origen:\t"+self.lector.desde)
+        print("Destino:\t"+self.lector.hasta)
     
     def imprimirAyuda(self):
         margen = "            "
@@ -29,7 +31,7 @@ class Vuelos:
         print(margen+"COR,ROS, 30\n" + margen+"MDZ, AEP,70\n" + margen+"NQN,IGR,150")
 
     def procesar(self,archivo):
-        lector = Lector(archivo)
+        self.lector = Lector(archivo)
         return
 
 if "__main__" == __name__:
