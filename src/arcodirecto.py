@@ -1,10 +1,17 @@
+class ArcoInverso:
+    def __init__(self,directo):
+        self._directo = directo
+
+    def capacidad(self):
+        return self._directo.capacidad()
+
 class ArcoDirecto:
     def __init__(self,capacidad,flujo=0):
         if(flujo>capacidad):
             raise Exception("El flujo supera a la capacidad")
         self._capacidad = capacidad
         self._flujo = flujo
-        self._inverso = {capacidad:0}
+        self._inverso = ArcoInverso(self)
 
     def capacidad(self):
         return self._capacidad
