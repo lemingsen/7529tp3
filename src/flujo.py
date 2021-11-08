@@ -18,8 +18,9 @@ class ConversorAFlujo:
             self.grafo.insertarArcoConAlias(alias_desde,alias_hasta,inverso)
 
 class Flujo:
-    def __init__(self):
-        pass
+    def __init__(self,grafo):
+        self.grafo = grafo
+        Flujo.convertir(grafo)
 
     @staticmethod
     def convertir(grafo):
@@ -27,3 +28,6 @@ class Flujo:
         grafo.modificarPesos(conversor)
         conversor.agregarInversosAGrafo()
         pass
+
+    def bfs(self,desde,hasta):
+        return [desde, hasta]
