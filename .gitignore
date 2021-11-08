@@ -137,12 +137,12 @@ tp3_grupo404.synctex.gz
 tp3_grupo404.synctex(busy)
 tp3_grupo404.toc
 
-# textlive: resoluciones
-informe/src/resol*.aux
-informe/src/resol*.fdb_latexmk
-informe/src/resol*.fls
-informe/src/resol*.log
-informe/src/resol*.synctex.gz
-informe/src/resol*.synctex(busy)
-informe/src/resol*.toc
-informe/src/resol*.pdf
+# textlive: resoluciones y otras dependencias
+informe/src/*.aux
+informe/src/*.fdb_latexmk
+informe/src/*.fls
+informe/src/*.log
+informe/src/*.synctex.gz
+informe/src/*.synctex(busy)
+informe/src/*.toc
+informe/src/*.pdf
