@@ -127,5 +127,23 @@ class TestGrafoSimple(unittest.TestCase):
             (4,1, 0), (4,3,5), (4,5,0), (5,4, 5)
         ])
 
+    def test_aumentar_camino_corto(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",11)
+        grafo.insertarArcoConAlias("A","C",11)
+        grafo.insertarArcoConAlias("C","D",11)
+        grafo.insertarArcoConAlias("B","E",11)
+        grafo.insertarArcoConAlias("D","E",11)
+        grafo.insertarArcoConAlias("E","F",5)
+        flujo = Flujo(grafo)
+        flujo.aumentar(0,[1,4,5])
+        arcos = [(u,v,w.valor()) for (u,v,w) in grafo.arcos()]
+        arcos.sort()
+        self.assertEqual(arcos, [
+            (0,1,6), (0,2,11), (1,0,5), (1,4, 6),
+            (2,0,0), (2,3,11), (3,2,0), (3,4,11),
+            (4,1,5), (4,3,0), (4,5,0), (5,4, 5)
+        ])
+
 if __name__ == '__main__':
     unittest.main()
