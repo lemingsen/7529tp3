@@ -1,6 +1,6 @@
 class ArcoDirecto:
     def __init__(self,capacidad):
-        pass
+        self._capacidad = capacidad
 
     def capacidad(self):
-        return 3
+        return self._capacidad
