@@ -118,5 +118,14 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertEqual(arco.valor(),12)
         self.assertEqual(inverso.valor(),1)
 
+    def test_aumentar_inverso_recien_creado_al_limite(self):
+        arco = ArcoDirecto(11,flujo=2)
+        inverso = arco.inverso()
+        inverso.aumentar(2)
+        self.assertEqual(arco.valor(),11)
+        self.assertEqual(inverso.valor(),0)
+        self.assertEqual(arco.capacidad(),11)
+        self.assertEqual(inverso.capacidad(),11)
+
 if __name__ == '__main__':
     unittest.main()
