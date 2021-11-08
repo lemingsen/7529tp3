@@ -4,12 +4,13 @@ class ArcoDirecto:
             raise Exception("El flujo supera a la capacidad")
         self._capacidad = capacidad
         self._flujo = flujo
+        self._inverso = {}
 
     def capacidad(self):
         return self._capacidad
 
     def inverso(self):
-        return {}
+        return self._inverso
 
     def valor(self):
         """En caso de un arco directo, el valor disponible es el residuo (capacidad - flujo)"""

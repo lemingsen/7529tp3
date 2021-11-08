@@ -38,6 +38,11 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertIsNot(inverso2, arco2)
         self.assertIsNot(inverso1, inverso2)
 
+    def test_inverso_recreado_es_el_mismo(self):
+        arco = ArcoDirecto(4)
+        inverso1 = arco.inverso()
+        inverso2 = arco.inverso()
+        self.assertIs(inverso1, inverso2)
 
 if __name__ == '__main__':
     unittest.main()
