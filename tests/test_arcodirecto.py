@@ -165,5 +165,9 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertEqual(arco.capacidad(),10)
         self.assertEqual(inverso.capacidad(),10)
 
+    def test_fluir_inverso_negativo_pasando_limite(self):
+        arco = ArcoDirecto(10,flujo=7)
+        self.assertRaises(Exception,arco.inverso().fluir,-4)
+
 if __name__ == '__main__':
     unittest.main()
