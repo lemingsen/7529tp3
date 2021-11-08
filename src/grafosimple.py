@@ -33,10 +33,10 @@ class GrafoSimple:
             self._arcosDesdeOrigen.append([])
             return nuevoId
 
-    def arcoDesdeNodoId(self, idOrigen):
+    def arcoDesdeNodoId(self, idOrigen, hasta=None):
         if (idOrigen <0) or (idOrigen >= self.cantidadNodos()):
             raise Exception("El id de origen del nodo no existe")
-        return (arco for arco in self._arcosDesdeOrigen[idOrigen])
+        return (arco for arco in self._arcosDesdeOrigen[idOrigen] if None==hasta or hasta==arco[0])
 
     def arcos(self):
         return ( (desde,hasta,peso)

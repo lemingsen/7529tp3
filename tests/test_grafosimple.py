@@ -169,5 +169,17 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual(arcos[2][2].get('flujo'),0)
         self.assertEqual(arcos[2][2].get('max'),  1)
 
+    def test_arcos_desde_hasta(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",-2)
+        grafo.insertarArcoConAlias("C","D",-2)
+        grafo.insertarArcoConAlias("A","D",-1)
+        grafo.insertarArcoConAlias("B","C",5)
+        grafo.insertarArcoConAlias("D","B",-3)
+        self.assertEqual(list(grafo.arcoDesdeNodoId(0,hasta=3)), [(3,-1)])
+        self.assertEqual(list(grafo.arcoDesdeNodoId(1,hasta=3)), [])
+        self.assertEqual(list(grafo.arcoDesdeNodoId(2,hasta=3)), [(3,-2)])
+        self.assertEqual(list(grafo.arcoDesdeNodoId(3,hasta=None)), [(1,-3)])
+
 if __name__ == '__main__':
     unittest.main()
