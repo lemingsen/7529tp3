@@ -42,8 +42,7 @@ class Flujo:
         return camino
 
     def bfs_datos(self,desde,hasta):
-        cantNodos = self.grafo.cantidadNodos()
-        anteriores = [None for i in range(cantNodos)]
+        anteriores = [None for i in range(self.grafo.cantidadNodos())]
         siguientes = [desde]
         while len(siguientes) > 0:
             actual = siguientes.pop(0)
