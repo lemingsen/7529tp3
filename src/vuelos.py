@@ -1,5 +1,6 @@
 import sys
 from src.lector import Lector
+from src.flujo import Flujo
 
 class Vuelos:
     def __init__(self,args):
@@ -9,13 +10,20 @@ class Vuelos:
             self.procesar(args[0])
             self.imprimir()
         except Exception as ex:
-            print("Se produjo un error: \n"+str(ex))
+            print("Se produjo un error: "+str(ex))
         return
 
     def imprimir(self):
         """Imprime el resultado."""
         print("Origen:\t"+self.lector.desde)
         print("Destino:\t"+self.lector.hasta)
+        print("Máx. pasajeros:\t"+str(self.pasajeros))
+        print("Cant. vuelos:\t"+str(len(self.corte)))
+        print("\t"+("DESDE".ljust(15))+"\tHASTA")
+        for (desde_id,hasta_id) in self.corte:
+            desde = str(self.lector.grafo.alias(id=desde_id)).ljust(15)
+            hasta = str(self.lector.grafo.alias(id=hasta_id)).ljust(15)
+            print("\t"+desde+"\t"+hasta)
     
     def imprimirAyuda(self):
         margen = "            "
@@ -32,6 +40,11 @@ class Vuelos:
 
     def procesar(self,archivo):
         self.lector = Lector(archivo)
+        self.flujo = Flujo(self.lector.grafo)
+        desde = self.lector.desde_id
+        hasta = self.lector.hasta_id
+        self.pasajeros = self.flujo.edmonds(desde,hasta)
+        A, self.corte, B = self.flujo.corte_actual(desde)
         return
 
 if "__main__" == __name__:
