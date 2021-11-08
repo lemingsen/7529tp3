@@ -17,6 +17,9 @@ class ArcoDirecto:
         self._flujo = flujo
         self._inverso = ArcoInverso(self)
 
+    def aumentar(self,cantidad):
+        self._flujo += cantidad
+
     def capacidad(self):
         return self._capacidad
 
