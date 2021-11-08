@@ -14,8 +14,8 @@ class TestArcoDirecto(unittest.TestCase):
         arco1 = ArcoDirecto(7)
         arco2 = ArcoDirecto(8,flujo=2)
 
-        self.assertEqual(arco1.valor(),0)
-        self.assertEqual(arco2.valor(),2)
+        self.assertEqual(arco1.valor(),7)
+        self.assertEqual(arco2.valor(),6)
         self.assertEqual(arco2.capacidad(),8)
 
     def test_valor_recien_creado_supera_capacidad(self):
@@ -24,8 +24,9 @@ class TestArcoDirecto(unittest.TestCase):
     def test_valor_recien_creado_iguala_capacidad(self):
         arco = ArcoDirecto(10,10)
         self.assertEqual(arco.capacidad(),10)
-        self.assertEqual(arco.valor(),10)
+        self.assertEqual(arco.valor(),0)
         
+
 
 if __name__ == '__main__':
     unittest.main()

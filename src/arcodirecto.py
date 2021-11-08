@@ -9,4 +9,5 @@ class ArcoDirecto:
         return self._capacidad
 
     def valor(self):
-        return self._flujo
+        """En caso de un arco directo, el valor disponible es el residuo (capacidad - flujo)"""
+        return self._capacidad - self._flujo
