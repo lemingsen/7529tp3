@@ -70,5 +70,15 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual( flujo.bfs(0,2), [0,2] )
         self.assertEqual( flujo.bfs(2,1), [2,1] )
 
+    def test_AB2AC3CB1_bfs_inexistentes(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",2)
+        grafo.insertarArcoConAlias("A","C",3)
+        grafo.insertarArcoConAlias("C","B",1)
+        flujo = Flujo(grafo)
+        self.assertEqual( flujo.bfs(1,0), [] )
+        self.assertEqual( flujo.bfs(1,2), [] )
+        self.assertEqual( flujo.bfs(2,0), [] )
+
 if __name__ == '__main__':
     unittest.main()
