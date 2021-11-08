@@ -58,14 +58,19 @@ class TestLector(unittest.TestCase):
         self.assertEqual(grafo.idDeNodoAlias("A"),0)
         self.assertEqual(grafo.idDeNodoAlias("B"),1)
         self.assertEqual(list(grafo.arcos()),[(0,1,5)])
+        self.assertEqual(lector.desde_id, 1)
+        self.assertEqual(lector.hasta_id, 0)
 
     def test_BA_menos5(self):
         rutaArchivo = self.pathArchivo("entradas/test_BA_menos5.txt")
-        grafo = Lector(rutaArchivo).grafo
+        lector = Lector(rutaArchivo)
+        grafo = lector.grafo
 
         self.assertEqual(grafo.idDeNodoAlias("B"),0)
         self.assertEqual(grafo.idDeNodoAlias("A"),1)
         self.assertEqual(list(grafo.arcos()),[(0,1,-5)])
+        self.assertEqual(lector.desde_id, 1)
+        self.assertEqual(lector.hasta_id, 0)
 
     def test_destino_inexistente(self):
         rutaArchivo = self.pathArchivo("entradas/test_destino_inexistente.txt")
@@ -95,6 +100,8 @@ class TestLector(unittest.TestCase):
         self.assertEqual(list(grafo.arcos()),[
             (0,1, 5), (0,3,10), (1,8,5), (2,1,5), (2,5,8), (3,2, 2),
             (3,4,10), (4,8,10), (5,6,9), (6,8,8), (7,0,5), (7,2,20)])
+        self.assertEqual(lector.desde_id, 7)
+        self.assertEqual(lector.hasta_id, 8)
         
 if __name__ == '__main__':
     unittest.main()
