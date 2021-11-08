@@ -4,7 +4,15 @@
 
 \begin{document}
 
-Para la solución al problema planteado se propone emplear el algoritmo de Edmonds-Karp.
+Para la solución al problema planteado se propone reducir el problema a un problema de corte de flujo
+y solucionarlo con el algoritmo de Edmonds-Karp.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth,angle=0,origin=c]{out/reduc.png}
+    \caption{\label{reduc}Reducción del problema, todas las operaciones son polinómicas.}
+\end{figure}
+
 En resumen, la solución completa sigue los siguientes pasos:
 \begin{enumerate}
     \item Procesar el archivo en el formato dado a un grafo dirigido, utilizando lista de adyacencias.
