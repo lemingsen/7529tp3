@@ -1,8 +1,8 @@
 import unittest
 import types
-from src.flujo import ArcoDirecto
+from src.arcodirecto import ArcoDirecto
 
-class TestFlujo(unittest.TestCase):
+class TestArcoDirecto(unittest.TestCase):
     def test_capacidad_recien_creado(self):
         arco1 = ArcoDirecto(3)
         arco2 = ArcoDirecto(34)
