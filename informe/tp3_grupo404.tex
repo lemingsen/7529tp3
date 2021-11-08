@@ -10,11 +10,11 @@
 \usepackage{booktabs}
 \usepackage{cancel}
 \usepackage{caption}
-\usepackage{csquotes}
 \usepackage{subcaption}
 \usepackage{fancyhdr}
 \usepackage{fancyvrb,newverbs,xcolor} % Para lcverbatim
 \usepackage{fvextra}
+\usepackage{csquotes}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{float}
@@ -262,20 +262,29 @@ HINT: podría ser una buena idea utilizar 3SAT o VERTEX COVER.
 \setcounter{subsection}{0}%
 \renewcommand{\thesubsection}{\arabic{subsection}}%
 
-\newpage\subsection{Socorro: NP-Completo}\label{sec:parte3_1}
+\newpage\subsection{Reducción polinomial}\label{sec:parte3_1}
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.1]
+    Defina y explique qué es una reducción polinomial y para qué se utiliza.
 \end{tcolorbox}
 
 \subfile{src/resolP3_1}
 
-\newpage\subsection{Set-dominante: NP-Completo}\label{sec:parte3_2}
+\filbreak %\newpage
+\subsection{Importancia de NP-Completo}\label{sec:parte3_2}
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.2]
+    Explique detalladamente la importancia teórica de los problemas NP-Completos.
 \end{tcolorbox}
 
 \subfile{src/resolP3_2}
 
-\newpage\subsection{Tratabilidad}\label{sec:parte3_3}
+\newpage\subsection{Ejercicios teóricos}\label{sec:parte3_3}
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.2]
+    Tenemos un problema A, un problema B y una caja negra NA y NB que resuelven el
+    problema A y B respectivamente. Sabiendo que B es P.\begin{enumerate}
+        \item Qué podemos decir de A si utilizamos NA para resolver el problema B (asumimos que la reducción realizada para adaptar el problema B al problema A es polinomial)
+        \item Qué podemos decir de A si utilizamos NB para resolver el problema A (asumimos que la reducción realizada para adaptar el problema A al problema B es polinomial)
+        \item ¿Qué pasa con los puntos anteriores si no conocemos la complejidad de B, pero sabemos que A es NP-C?
+    \end{enumerate}
 \end{tcolorbox}
 
 \subfile{src/resolP3_3}
