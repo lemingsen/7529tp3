@@ -129,13 +129,13 @@ dmypy.json
 .pyre/
 
 # texlive
-tp2_grupo404.aux
-tp2_grupo404.fdb_latexmk
-tp2_grupo404.fls
-tp2_grupo404.log
-tp2_grupo404.synctex.gz
-tp2_grupo404.synctex(busy)
-tp2_grupo404.toc
+tp3_grupo404.aux
+tp3_grupo404.fdb_latexmk
+tp3_grupo404.fls
+tp3_grupo404.log
+tp3_grupo404.synctex.gz
+tp3_grupo404.synctex(busy)
+tp3_grupo404.toc
 
 # textlive: resoluciones
 informe/src/resol*.aux
