@@ -34,9 +34,30 @@ class TestLector(unittest.TestCase):
     def test_AB10_AB(self):
         rutaArchivo = self.pathArchivo("entradas/test_AB10_AB.txt")
         lector = Lector(rutaArchivo)
+        grafo = lector.grafo
 
         self.assertEqual(lector.desde, "A")
         self.assertEqual(lector.hasta, "B")
+        self.assertEqual(2,grafo.cantidadNodos())
+        self.assertEqual(1,grafo.cantidadArcos())
+        self.assertEqual(1,len(list(grafo.arcos())))
+        self.assertEqual(grafo.idDeNodoAlias("A"),0)
+        self.assertEqual(grafo.idDeNodoAlias("B"),1)
+        self.assertEqual(list(grafo.arcos()),[(0,1,10)])
+
+    def test_AB5_BA(self):
+        rutaArchivo = self.pathArchivo("entradas/test_AB5_BA.txt")
+        lector = Lector(rutaArchivo)
+        grafo = lector.grafo
+
+        self.assertEqual(lector.desde, "B")
+        self.assertEqual(lector.hasta, "A")
+        self.assertEqual(2,grafo.cantidadNodos())
+        self.assertEqual(1,grafo.cantidadArcos())
+        self.assertEqual(1,len(list(grafo.arcos())))
+        self.assertEqual(grafo.idDeNodoAlias("A"),0)
+        self.assertEqual(grafo.idDeNodoAlias("B"),1)
+        self.assertEqual(list(grafo.arcos()),[(0,1,5)])
 
 if __name__ == '__main__':
     unittest.main()
