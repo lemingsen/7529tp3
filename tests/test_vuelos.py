@@ -58,6 +58,11 @@ class TestVuelos(unittest.TestCase):
         out = self.ejecutar([rutaArchivo])
         self.assertTrue(self.lineaCumple(out, lambda txt: ("No such" in txt) or ("inexistente" in txt)))
 
+    def test_vacio(self):
+        rutaArchivo = self.pathArchivo("entradas/archivo_vacio.txt")
+        out = self.ejecutar([rutaArchivo])
+        self.assertTrue(self.lineaCumple(out, lambda txt: ("error" in txt)))
+
 
 if __name__ == '__main__':
     unittest.main()
