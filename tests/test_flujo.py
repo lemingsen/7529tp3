@@ -183,6 +183,7 @@ class TestGrafoSimple(unittest.TestCase):
         flujo = Flujo(grafo)
         fmax = flujo.edmonds(id_s,id_t)
         self.assertEqual(fmax,18)
-        
+
+
 if __name__ == '__main__':
     unittest.main()

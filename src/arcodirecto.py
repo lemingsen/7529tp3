@@ -5,6 +5,9 @@ class ArcoInverso:
     def capacidad(self):
         return self._directo.capacidad()
 
+    def es_directo(self):
+        return False
+
     def valor(self):
         """En caso de un arco inverso, el valor disponible es el flujo (capacidad - valor directo)"""
         return self._directo.capacidad() - self._directo.valor()
@@ -19,6 +22,9 @@ class ArcoDirecto:
         self._capacidad = capacidad
         self._flujo = flujo
         self._inverso = ArcoInverso(self)
+
+    def es_directo(self):
+        return True
 
     def fluir(self,cantidad):
         futuro = self._flujo + cantidad
