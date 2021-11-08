@@ -10,8 +10,6 @@ class ArcoInverso:
         return self._directo.capacidad() - self._directo.valor()
 
     def fluir(self,cantidad):
-        if cantidad > self.valor():
-            raise Exception()
         self._directo.fluir(-cantidad)
 
 class ArcoDirecto:
