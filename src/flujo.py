@@ -1,3 +1,4 @@
+from math import inf
 from src.arcodirecto import ArcoDirecto
 
 class ConversorAFlujo:
@@ -30,10 +31,32 @@ class Flujo:
         pass
 
     def bfs(self,desde,hasta):
+        distancias, anteriores = self.bfs_datos(desde,hasta)
+        if distancias[hasta] == inf:
+            return []
         camino = []
-        actual = desde
-        arcos_gen = self.grafo.arcoDesdeNodoId(actual)
-        for u,w in arcos_gen:
-            if(w.valor() and u==hasta):
-                camino.append(u)
+        actual = hasta
+        while actual != desde:
+            camino.insert(0, actual)
+            actual = anteriores[actual]
         return camino
+
+    def bfs_datos(self,desde,hasta):
+        cantNodos = self.grafo.cantidadNodos()
+        distancias = [0 if i == desde else inf for i in range(cantNodos)]
+        anteriores = [None for i in range(cantNodos)]
+        siguientes = [desde]
+        while len(siguientes) > 0:
+            actual = siguientes.pop(0)
+            if actual == hasta:
+                break
+            arcos_gen = self.grafo.arcoDesdeNodoId(actual)
+            for u,w in arcos_gen:
+                if (distancias[u] == inf) and (w.valor() > 0):
+                    distancias[u] = distancias[actual]+1
+                    anteriores[u] = actual
+                    siguientes.append(u)
+                    if u == hasta:
+                        break
+
+        return distancias, anteriores
