@@ -23,9 +23,10 @@ class ArcoDirecto:
         self._inverso = ArcoInverso(self)
 
     def aumentar(self,cantidad):
-        if(cantidad > self.valor()):
+        futuro = self._flujo + cantidad
+        if(futuro > self._capacidad) or (futuro < 0):
             raise Exception("No se puede superar la capacidad")
-        self._flujo += cantidad
+        self._flujo = futuro
 
     def capacidad(self):
         return self._capacidad
