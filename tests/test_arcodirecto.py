@@ -45,11 +45,18 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertIs(inverso1, inverso2)
 
     def test_capacidad_inverso_recien_creado(self):
-        arco1 = ArcoDirecto(3)
-        arco2 = ArcoDirecto(34)
+        inverso1 = ArcoDirecto(3)
+        inverso2 = ArcoDirecto(34)
 
-        self.assertEqual(arco1.inverso().capacidad(),3)
-        self.assertEqual(arco2.inverso().capacidad(),34)
+        self.assertEqual(inverso1.capacidad(),3)
+        self.assertEqual(inverso2.capacidad(),34)
+
+    def test_valor_inverso_recien_creado(self):
+        inverso1 = ArcoDirecto(7).inverso()
+        inverso2 = ArcoDirecto(9,flujo=2).inverso()
+        self.assertEqual(inverso1.valor(),0)
+        self.assertEqual(inverso2.valor(),2)
+        self.assertEqual(inverso2.capacidad(),9)
 
 if __name__ == '__main__':
     unittest.main()
