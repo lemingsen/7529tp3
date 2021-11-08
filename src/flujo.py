@@ -52,7 +52,7 @@ class Flujo:
                 break
             arcos_gen = self.grafo.arcoDesdeNodoId(actual)
             for u,w in arcos_gen:
-                if (distancias[u] == inf) and (w.valor() > 0):
+                if (anteriores[u] == None) and (w.valor() > 0):
                     distancias[u] = distancias[actual]+1
                     anteriores[u] = actual
                     siguientes.append(u)
