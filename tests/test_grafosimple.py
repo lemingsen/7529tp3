@@ -149,5 +149,25 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual(list(grafo.arcoDesdeNodoId(2)), [(1,(0,1))])
         self.assertEqual(list(grafo.arcos()),[(0,1,(0,2)), (0,2,(1,3)),  (2,1,(0,1))])
 
+    def test_transformar_peso_en_objeto(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",(0,2))
+        grafo.insertarArcoConAlias("A","C",(1,3))
+        grafo.insertarArcoConAlias("C","B",(0,1))
+        
+        grafo.modificarPesos( lambda w,u,v: {"flujo": w[0], "max": w[1]} )
+        arcos = list(grafo.arcos())
+
+        self.assertEqual(len(arcos),3)
+        # el primer [0/1/2] es el elemento en orden,
+        # el segundo es el peso porque cada arco es (desde,hasta,peso)
+        # y cada peso fue convertido en un diccionario 
+        self.assertEqual(arcos[0][2].get('flujo'),0)
+        self.assertEqual(arcos[0][2].get('max'),  2)
+        self.assertEqual(arcos[1][2].get('flujo'),1)
+        self.assertEqual(arcos[1][2].get('max'),  3)
+        self.assertEqual(arcos[2][2].get('flujo'),0)
+        self.assertEqual(arcos[2][2].get('max'),  1)
+
 if __name__ == '__main__':
     unittest.main()
