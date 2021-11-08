@@ -76,3 +76,10 @@ class Flujo:
         for arco in arcos:
             arco.fluir(cantidad)
         return cantidad
+
+    def edmonds(self,desde,hasta):
+        while True:
+            aumentable = self.bfs(desde,hasta)
+            if(len(aumentable)<1):
+                return
+            self.aumentar(desde,aumentable)
