@@ -30,4 +30,10 @@ class Flujo:
         pass
 
     def bfs(self,desde,hasta):
-        return [desde, hasta]
+        camino = []
+        actual = desde
+        arcos_gen = self.grafo.arcoDesdeNodoId(actual)
+        for u,w in arcos_gen:
+            if(w.valor() and u==hasta):
+                camino.append(u)
+        return camino
