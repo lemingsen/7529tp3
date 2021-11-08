@@ -94,5 +94,20 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual( flujo.bfs(0,3), [3] )
         self.assertEqual( flujo.bfs(0,4), [4] )
 
+    def test_pentagono_con_flujo_bfs(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",2)
+        grafo.insertarArcoConAlias("B","C",2)
+        grafo.insertarArcoConAlias("C","D",4)
+        grafo.insertarArcoConAlias("D","E",3)
+        grafo.insertarArcoConAlias("A","E",99)
+        flujo = Flujo(grafo)
+        flujo.fluir(2,3,2)
+        flujo.fluir(3,4,1)
+        self.assertEqual( flujo.bfs(0,1), [1] )
+        self.assertEqual( flujo.bfs(0,2), [1,2] )
+        self.assertEqual( flujo.bfs(0,3), [4,3] )
+        self.assertEqual( flujo.bfs(0,4), [4] )
+
 if __name__ == '__main__':
     unittest.main()

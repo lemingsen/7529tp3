@@ -58,3 +58,7 @@ class Flujo:
                         break
 
         return anteriores
+
+    def fluir(self,desde,hasta,cantidad):
+        arcos=[arco for (u,arco) in self.grafo.arcoDesdeNodoId(desde) if u==hasta]
+        return arcos[0].fluir(cantidad)
