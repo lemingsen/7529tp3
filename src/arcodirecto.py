@@ -10,7 +10,7 @@ class ArcoInverso:
         return self._directo.capacidad() - self._directo.valor()
 
     def aumentar(self,cantidad):
-        if 0 == self.valor():
+        if cantidad > self.valor():
             raise Exception()
         self._directo.aumentar(-cantidad)
 
