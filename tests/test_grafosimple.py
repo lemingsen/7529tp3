@@ -145,9 +145,9 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual(grafo.idDeNodoAlias("B"),1)
         self.assertEqual(grafo.idDeNodoAlias("C"),2)
         self.assertEqual(list(grafo.arcoDesdeNodoId(0)), [(1,(0,2)), (2,(1,3))])
-        self.assertEqual(list(grafo.arcoDesdeNodoId(1)), [(1,(0,1))])
-        self.assertEqual(list(grafo.arcoDesdeNodoId(2)), [])
-        self.assertEqual(list(grafo.arcos()),[(0,1,(0,2)), (0,2,(1,3)),  (1,1,(0,1))])
+        self.assertEqual(list(grafo.arcoDesdeNodoId(1)), [])
+        self.assertEqual(list(grafo.arcoDesdeNodoId(2)), [(1,(0,1))])
+        self.assertEqual(list(grafo.arcos()),[(0,1,(0,2)), (0,2,(1,3)),  (2,1,(0,1))])
 
 if __name__ == '__main__':
     unittest.main()
