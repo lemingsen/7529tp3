@@ -58,101 +58,101 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertEqual(inverso2.valor(),2)
         self.assertEqual(inverso2.capacidad(),9)
 
-    def test_aumentar_recien_creado_sin_flujo(self):
+    def test_fluir_recien_creado_sin_flujo(self):
         arco = ArcoDirecto(6)
         inverso = arco.inverso()
-        arco.aumentar(5)
+        arco.fluir(5)
         self.assertEqual(arco.valor(),1)
         self.assertEqual(inverso.valor(),5)
         self.assertEqual(arco.capacidad(),6)
         self.assertEqual(inverso.capacidad(),6)
 
-    def test_aumentar_recien_creado_con_flujo(self):
+    def test_fluir_recien_creado_con_flujo(self):
         arco = ArcoDirecto(13,flujo=2)
         inverso = arco.inverso()
-        arco.aumentar(10)
+        arco.fluir(10)
         self.assertEqual(arco.valor(),1)
         self.assertEqual(inverso.valor(),12)
         self.assertEqual(arco.capacidad(),13)
         self.assertEqual(inverso.capacidad(),13)
 
-    def test_aumentar_recien_creado_al_limite(self):
+    def test_fluir_recien_creado_al_limite(self):
         arco = ArcoDirecto(11,flujo=2)
         inverso = arco.inverso()
-        arco.aumentar(9)
+        arco.fluir(9)
         self.assertEqual(arco.valor(),0)
         self.assertEqual(inverso.valor(),11)
         self.assertEqual(arco.capacidad(),11)
         self.assertEqual(inverso.capacidad(),11)
 
-    def test_aumentar_recien_creado_pasando_limite(self):
+    def test_fluir_recien_creado_pasando_limite(self):
         arco = ArcoDirecto(11,flujo=2)
         inverso = arco.inverso()
-        self.assertRaises(Exception,arco.aumentar,10)
+        self.assertRaises(Exception,arco.fluir,10)
 
-    def test_aumentar_ya_aumentado_al_limite(self):
+    def test_fluir_ya_aumentado_al_limite(self):
         arco = ArcoDirecto(14,flujo=3)
         inverso = arco.inverso()
-        arco.aumentar(4)
-        arco.aumentar(7)
+        arco.fluir(4)
+        arco.fluir(7)
         self.assertEqual(arco.valor(),0)
         self.assertEqual(inverso.valor(),14)
         self.assertEqual(arco.capacidad(),14)
         self.assertEqual(inverso.capacidad(),14)
 
-    def test_aumentar_ya_aumentado_pasando_limite(self):
+    def test_fluir_ya_aumentado_pasando_limite(self):
         arco = ArcoDirecto(10,flujo=3)
         inverso = arco.inverso()
-        arco.aumentar(4)
-        self.assertRaises(Exception,arco.aumentar,4)
+        arco.fluir(4)
+        self.assertRaises(Exception,arco.fluir,4)
 
-    def test_aumentar_inverso_recien_creado_sin_flujo(self):
+    def test_fluir_inverso_recien_creado_sin_flujo(self):
         arco = ArcoDirecto(6)
         inverso = arco.inverso()
-        self.assertRaises(Exception,inverso.aumentar,1)
+        self.assertRaises(Exception,inverso.fluir,1)
 
-    def test_aumentar_inverso_recien_creado_con_flujo(self):
+    def test_fluir_inverso_recien_creado_con_flujo(self):
         arco = ArcoDirecto(13,flujo=9)
         inverso = arco.inverso()
-        inverso.aumentar(8)
+        inverso.fluir(8)
         self.assertEqual(arco.valor(),12)
         self.assertEqual(inverso.valor(),1)
 
-    def test_aumentar_inverso_recien_creado_al_limite(self):
+    def test_fluir_inverso_recien_creado_al_limite(self):
         arco = ArcoDirecto(11,flujo=2)
         inverso = arco.inverso()
-        inverso.aumentar(2)
+        inverso.fluir(2)
         self.assertEqual(arco.valor(),11)
         self.assertEqual(inverso.valor(),0)
         self.assertEqual(arco.capacidad(),11)
         self.assertEqual(inverso.capacidad(),11)
 
-    def test_aumentar_inverso_ya_aumentado_al_limite(self):
+    def test_fluir_inverso_ya_aumentado_al_limite(self):
         arco = ArcoDirecto(14,flujo=11)
         inverso = arco.inverso()
-        inverso.aumentar(4)
-        inverso.aumentar(7)
+        inverso.fluir(4)
+        inverso.fluir(7)
         self.assertEqual(arco.valor(),14)
         self.assertEqual(inverso.valor(),0)
         self.assertEqual(arco.capacidad(),14)
         self.assertEqual(inverso.capacidad(),14)
 
-    def test_aumentar_inverso_ya_aumentado_pasando_limite(self):
+    def test_fluir_inverso_ya_aumentado_pasando_limite(self):
         arco = ArcoDirecto(10,flujo=7)
         inverso = arco.inverso()
-        inverso.aumentar(4)
-        self.assertRaises(Exception,inverso.aumentar,4)
+        inverso.fluir(4)
+        self.assertRaises(Exception,inverso.fluir,4)
 
-    def test_aumentar_negativo_sin_pasar_limite(self):
+    def test_fluir_negativo_sin_pasar_limite(self):
         arco = ArcoDirecto(10,flujo=7)
-        arco.aumentar(-7)
+        arco.fluir(-7)
         self.assertEqual(arco.valor(),10)
         self.assertEqual(arco.inverso().valor(),0)
         self.assertEqual(arco.capacidad(),10)
 
-    def test_aumentar_negativo_pasando_limite(self):
+    def test_fluir_negativo_pasando_limite(self):
         arco = ArcoDirecto(10,flujo=7)
-        self.assertRaises(Exception,arco.aumentar,-8)
+        self.assertRaises(Exception,arco.fluir,-8)
 
 if __name__ == '__main__':
     unittest.main()

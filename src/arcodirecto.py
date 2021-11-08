@@ -9,10 +9,10 @@ class ArcoInverso:
         """En caso de un arco inverso, el valor disponible es el flujo (capacidad - valor directo)"""
         return self._directo.capacidad() - self._directo.valor()
 
-    def aumentar(self,cantidad):
+    def fluir(self,cantidad):
         if cantidad > self.valor():
             raise Exception()
-        self._directo.aumentar(-cantidad)
+        self._directo.fluir(-cantidad)
 
 class ArcoDirecto:
     def __init__(self,capacidad,flujo=0):
@@ -22,7 +22,7 @@ class ArcoDirecto:
         self._flujo = flujo
         self._inverso = ArcoInverso(self)
 
-    def aumentar(self,cantidad):
+    def fluir(self,cantidad):
         futuro = self._flujo + cantidad
         if(futuro > self._capacidad) or (futuro < 0):
             raise Exception("No se puede superar la capacidad")
