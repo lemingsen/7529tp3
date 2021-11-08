@@ -15,6 +15,8 @@ class Lector:
             for entrada in entradas:
                 if entrada:
                     self.grafo.insertarArcoConAlias(entrada[0], entrada[1], int(entrada[2]))
+        if None == self.grafo.idDeNodoAlias(self.desde, crear=False):
+            raise Exception("El origen "+str(self.desde)+" no se encuentra en el archivo "+nombreArchivo)
         if None == self.grafo.idDeNodoAlias(self.hasta, crear=False):
             raise Exception("El destino "+str(self.hasta)+" no se encuentra en el archivo "+nombreArchivo)
 

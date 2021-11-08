@@ -71,5 +71,9 @@ class TestLector(unittest.TestCase):
         rutaArchivo = self.pathArchivo("entradas/test_destino_inexistente.txt")
         self.assertRaises(Exception,Lector,rutaArchivo)
 
+    def test_origen_inexistente(self):
+        rutaArchivo = self.pathArchivo("entradas/test_origen_inexistente.txt")
+        self.assertRaises(Exception,Lector,rutaArchivo)
+
 if __name__ == '__main__':
     unittest.main()
