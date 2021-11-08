@@ -4,8 +4,22 @@
 
 \begin{document}
 
-\emph{No se ha llegado a completar este punto.}
+Un problema es NP-Completo si pertenece a NP y también pertenece NP-Hard,
+lo cual quiere decir que es uno de los problemas más difíciles de resolver dentro de NP.
+Esta condición de ser de los problemas más difíciles de resolver dentro de NP
+los hace importantes ya que si se encontrara la solución a un problema NP-Completo
+en tiempo polinómico, se probaría que $P = NP$.
 
+Esto ocurre dado que sabemos que $P \subseteq NP$,
+\footnote{ Si se tiene un algoritmo P que resuelve un problema de decisión,
+puede usarse como "algoritmo certificador" NP, para verificar la solución dada sea correcta
+simplemente comparando que sean la misma. Por esto, todo algoritmo de decisión P es también NP;
+pero no necesariamente al revés.}
+y si se pudiera probar que el problema más difícil de NP puede solucionarse en tiempo polinomial,
+entonces todos los problemas de NP se podrían solucionar en tiempo polinomial
+y por lo tanto $NP \subseteq  P$.
+
+Finalmente, si $NP \subseteq P$ y $P \subseteq NP$, entonces $P = NP$.
 
 % FIN DEL DOCUMENTO (SECCIÓN P3.2)
 % NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO

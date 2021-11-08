@@ -4,9 +4,26 @@
 
 \begin{document}
 
-\emph{No se ha llegado a completar este punto.}
+\noindent\textbf{1. Qué podemos decir de A si utilizamos NA para resolver el problema B
+(asumimos que la reducción realizada para adaptar el problema B al problema A es polinomial)}
 
+$B \leq_p A$. Que $A$ es tan difícil de resolver como $B$. No me dice nada.
 
+\vspace{15mm}\noindent\textbf{2. Qué podemos decir de A si utilizamos NB para resolver el problema A
+(asumimos que la reducción realizada para adaptar el problema A al problema B es polinomial)}
+
+$A \leq_p B$. Se puede decir que $A \subseteq P$.
+Si $B$ es igual o más difícil de resolver que $A$, y $B$ es $P$; entonces $A$ tiene que ser $P$.
+
+\vspace{15mm}\noindent\textbf{3. ¿Qué pasa con los puntos anteriores si no conocemos la complejidad de B,
+pero sabemos que A es NP-C?}
+
+A es NP-C $\implies$ A es NP-H y A es NP.
+
+\begin{description}
+    \item[1) $B \leq_p A$] Puedo decir que B es al menos NP.
+    \item[2) $A \leq_p B$] Entonces puedo decir que B es NP-Hard.
+\end{description}
 % FIN DEL DOCUMENTO (SECCIÓN P3.3)
 % NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO
 \end{document}
