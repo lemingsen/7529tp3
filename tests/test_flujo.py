@@ -182,6 +182,9 @@ class TestGrafoSimple(unittest.TestCase):
 
         flujo = Flujo(grafo)
         fmax = flujo.edmonds(id_s,id_t)
+        corte = [(desde,hasta) for (desde,hasta,arco) in grafo.arcos if not arco.es_directo() and 0 == arco.valor()]
+        corte.sort()
+        print(corte)
         self.assertEqual(fmax,18)
 
 
