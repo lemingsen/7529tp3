@@ -143,5 +143,12 @@ class TestArcoDirecto(unittest.TestCase):
         inverso.aumentar(4)
         self.assertRaises(Exception,inverso.aumentar,4)
 
+    def test_aumentar_negativo_sin_pasar_limite(self):
+        arco = ArcoDirecto(10,flujo=7)
+        arco.aumentar(-7)
+        self.assertEqual(arco.valor(),10)
+        self.assertEqual(arco.inverso().valor(),0)
+        self.assertEqual(arco.capacidad(),10)
+
 if __name__ == '__main__':
     unittest.main()
