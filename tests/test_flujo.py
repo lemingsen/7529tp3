@@ -163,5 +163,26 @@ class TestGrafoSimple(unittest.TestCase):
             (4,1,5), (4,3,0), (4,5,0), (5,4, 5)
         ])
 
+    def test_diapo3(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("a","b", 5)
+        grafo.insertarArcoConAlias("c","b", 5)
+        grafo.insertarArcoConAlias("a","d",10)
+        grafo.insertarArcoConAlias("d","c", 2)
+        grafo.insertarArcoConAlias("d","e",10)
+        grafo.insertarArcoConAlias("c","f", 8)
+        grafo.insertarArcoConAlias("f","g", 9)
+        grafo.insertarArcoConAlias("s","a", 5)
+        grafo.insertarArcoConAlias("s","c",20)
+        grafo.insertarArcoConAlias("b","t", 5)
+        grafo.insertarArcoConAlias("e","t",10)
+        grafo.insertarArcoConAlias("g","t", 8)
+        id_s = grafo.idDeNodoAlias("s")
+        id_t = grafo.idDeNodoAlias("t")
+
+        flujo = Flujo(grafo)
+        fmax = flujo.edmonds(id_s,id_t)
+        self.assertEqual(fmax,18)
+        
 if __name__ == '__main__':
     unittest.main()

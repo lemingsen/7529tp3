@@ -78,8 +78,9 @@ class Flujo:
         return cantidad
 
     def edmonds(self,desde,hasta):
+        suma = 0
         while True:
             aumentable = self.bfs(desde,hasta)
             if(len(aumentable)<1):
-                return
-            self.aumentar(desde,aumentable)
+                return suma
+            suma += self.aumentar(desde,aumentable)
