@@ -20,5 +20,11 @@ class TestArcoDirecto(unittest.TestCase):
     def test_valor_recien_creado_supera_capacidad(self):
         self.assertRaises(Exception,ArcoDirecto,10,11)
 
+    def test_valor_recien_creado_iguala_capacidad(self):
+        arco = ArcoDirecto(10,10)
+        self.assertEqual(arco.capacidad(),10)
+        self.assertEqual(arco.valor(),10)
+        
+
 if __name__ == '__main__':
     unittest.main()
