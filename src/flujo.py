@@ -31,8 +31,8 @@ class Flujo:
         pass
 
     def bfs(self,desde,hasta):
-        distancias, anteriores = self.bfs_datos(desde,hasta)
-        if distancias[hasta] == inf:
+        anteriores = self.bfs_datos(desde,hasta)
+        if anteriores[hasta] == None:
             return []
         camino = []
         actual = hasta
@@ -43,7 +43,6 @@ class Flujo:
 
     def bfs_datos(self,desde,hasta):
         cantNodos = self.grafo.cantidadNodos()
-        distancias = [0 if i == desde else inf for i in range(cantNodos)]
         anteriores = [None for i in range(cantNodos)]
         siguientes = [desde]
         while len(siguientes) > 0:
@@ -53,10 +52,9 @@ class Flujo:
             arcos_gen = self.grafo.arcoDesdeNodoId(actual)
             for u,w in arcos_gen:
                 if (anteriores[u] == None) and (w.valor() > 0):
-                    distancias[u] = distancias[actual]+1
                     anteriores[u] = actual
                     siguientes.append(u)
                     if u == hasta:
                         break
 
-        return distancias, anteriores
+        return anteriores
