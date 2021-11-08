@@ -61,3 +61,18 @@ class Flujo:
     def fluir(self,desde,hasta,cantidad):
         arcos=[arco for (u,arco) in self.grafo.arcoDesdeNodoId(desde) if u==hasta]
         return arcos[0].fluir(cantidad)
+
+    def aumentar(self,desde,siguientes,cantidad=None):
+        arcos = []
+        cuello = inf
+        while len(siguientes)>0:
+            hasta = siguientes.pop(0)
+            arco = list(self.grafo.arcoDesdeNodoId(desde,hasta=hasta))[0][1]
+            cuello = min(cuello, arco.valor())
+            arcos.append(arco)
+            desde = hasta
+        if None == cantidad:
+            cantidad = cuello
+        for arco in arcos:
+            arco.fluir(cantidad)
+        return cantidad

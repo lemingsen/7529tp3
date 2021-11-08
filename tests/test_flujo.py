@@ -109,5 +109,23 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual( flujo.bfs(0,3), [4,3] )
         self.assertEqual( flujo.bfs(0,4), [4] )
 
+    def test_aumentar_camino_largo(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",11)
+        grafo.insertarArcoConAlias("A","C",11)
+        grafo.insertarArcoConAlias("C","D",11)
+        grafo.insertarArcoConAlias("B","E",11)
+        grafo.insertarArcoConAlias("D","E",11)
+        grafo.insertarArcoConAlias("E","F",5)
+        flujo = Flujo(grafo)
+        flujo.aumentar(0,[2,3,4,5])
+        arcos = [(u,v,w.valor()) for (u,v,w) in grafo.arcos()]
+        arcos.sort()
+        self.assertEqual(arcos, [
+            (0,1,11), (0,2,6), (1,0,0), (1,4,11),
+            (2,0, 5), (2,3,6), (3,2,5), (3,4, 6),
+            (4,1, 0), (4,3,5), (4,5,0), (5,4, 5)
+        ])
+
 if __name__ == '__main__':
     unittest.main()
