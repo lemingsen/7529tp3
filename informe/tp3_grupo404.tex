@@ -1,0 +1,287 @@
+\documentclass[titlepage,a4paper]{article}
+\PassOptionsToPackage{table,xcdraw}{xcolor}
+
+\usepackage{a4wide}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,bookmarksopen=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{fancyvrb,newverbs,xcolor} % Para lcverbatim
+\usepackage{fvextra}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{standalone}
+\usepackage{subfiles}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\crefname{table}{cuadro}{cuadros}
+\crefname{figure}{figura}{figuras}
+\crefname{section}{sección}{secciónes}
+\crefname{subsection}{sección}{secciónes}
+\crefname{subsubsection}{sección}{secciónes}
+
+\pagestyle{fancy} % Encabezado y pie de página
+\fancyhf{}
+\fancyhead[L]{Grupo 404 - TP3}
+\fancyhead[R]{Teoría de Algoritmos I - FIUBA}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% lcverbatim = Cuadro de código con fondo gris
+\definecolor{cverbbg}{gray}{0.93}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\begin{document}
+\begin{titlepage} % Carátula
+	\hfill\includegraphics[width=6cm]{img/logofiuba.jpg}
+    \centering
+    \vfill
+    \Huge \textbf{Trabajo Práctico 3}
+    \vskip2cm
+    \Large [7529/9506] Teoría de Algoritmos I\\
+    Segundo cuatrimestre de 2021
+    \vfill
+    \begin{tabular}{ | l | l | } % Datos del alumno
+      \hline
+      Grupo: & 404 \\ \hline
+      Repositorio: & github.com/lucashemmingsen/7529tp3 \\ \hline
+      Entrega: & nº 1 (08/11/2021) \\ \hline
+  	\end{tabular}
+    \vfill
+    \includestandalone[mode=tex,width=\textwidth]{src/integrantes}
+    \vfill
+\end{titlepage}
+
+\tableofcontents % Índice general
+\newpage
+
+\renewcommand{\thesection}{\Alph{section}}%
+\setcounter{section}{8} % Letra H
+
+\section{Introducción}\label{sec:intro}
+\subsection{Resumen}
+El presente informe documenta el enunciado y la solución del tercer trabajo práctico
+de la materia Teoría de Algoritmos I. El mismo comprende el análisis de los problemas
+planteados, la implementación y comparación de complejidad del primero de ellos, y
+varios puntos teóricos.
+
+\subsection{Lineamientos básicos}
+\begin{itemize}
+    \item El trabajo se realizará en grupos de cinco personas.
+    \item Se debe entregar el informe en formato pdf y código fuente en (.zip) en el aula virtual de la materia.
+    \item El lenguaje de implementación es libre. Recomendamos utilizar C, C++ o Python.
+        Sin embargo si se desea utilizar algún otro, se debe pactar con los docentes.
+    \item Incluir en el informe los requisitos y procedimientos para su compilación y ejecución. La ausencia
+        de esta información no permite probar el trabajo y deberá ser re-entregado con esta información.
+    \item El informe debe presentar carátula con el nombre del grupo, datos de los
+        integrantes y y fecha de entrega. Debe incluir número de hoja en cada página.
+    \item En caso de re-entrega, entregar un apartado con las correcciones mencionadas
+\end{itemize}
+
+
+
+
+\setcounter{section}{0}%
+\renewcommand{\thesection}{P\arabic{section}}%
+
+\newpage\section{Parte 1: Una campaña publicitaria masiva pero mínima}\label{sec:parte1}
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\alph{subsection}}%
+
+\subsection{Enunciado}
+
+Una empresa de turismo que vende excursiones desea realizar una campaña publicitaria en diferentes vuelos comerciales con el objetivo de llegar a todos los viajeros que parten del país A y que se dirigen al país B. Estos viajeros utilizan diferentes rutas (algunos vuelos directos, otros armando sus propios recorridos intermedios). Se conoce para una semana determinada todos los vuelos entre los diferentes aeropuertos con sus diferentes capacidades. Además parten del supuesto que durante ese periodo la afluencia entre A y B no se verá disminuida por viajes entre otros destinos.
+
+Desean determinar en qué trayectos simples (trayecto de un viaje que inicia desde un aeropuerto y termina en otro) poner publicidad de forma de alcanzar a TODAS las personas que tienen el destino inicial A y el destino final B. Pero además desean que siempre que sea posible seleccionen la combinación que tenga el menor número de vuelos comerciales. Esto es porque pagan tanto por cantidad de vuelos como por pasajeros que cumplan con la condición de ser del país de origen A y con destino final B.
+
+\noindent Se pide:
+\begin{enumerate}
+    \item Proponer una solución algorítmica que resuelva el problema de forma eficiente. Explicarla paso a paso. Utilice diagramas para representarla.
+    \item Plantear la solución como si fuese una reducción de problema. ¿Puede afirmar que corresponde a una reducción polinomial? Justificar.
+    \item ¿Podría asegurar que su solución es óptima?
+    \item Programe la solución
+    \item Compare la complejidad temporal y espacial de su solución programada con la teórica. ¿Es la misma o difiere?
+\end{enumerate}
+
+\subsection{Formato de los archivos}\label{enuncFormatoArchivos}
+El programa debe recibir por parámetro el path del archivo donde se encuentran los vuelos disponibles entre pares de ciudades y la cantidad maxima de pasajeron en la misma.
+
+El archivo debe ser de tipo texto y presentar por renglón, separados por coma el pais de origen el de destino y la capacidad del mismo. Las primeras dos lineas del archivo contiene el pais de origen y de destino respectivamente
+
+Ejemplo: “vuelos.txt”
+\begin{lcverbatim}
+    A
+    B
+    A,D,140
+    A,E,200
+    D,B,100
+    ...
+\end{lcverbatim}
+
+Debe resolver el problema y retornar por pantalla la solución. Debe mostrar por consola en en que vuelos poner la publicidad. Además imprimir cual es la cantidad maxima de pasajeros que puede inr de A a B.
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\arabic{subsection}}%
+
+\newpage\subsection{Vuelos: Propuesta}\label{sec:parte1_1}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P1.1]
+    Proponer una solución algorítmica que resuelva el problema de forma eficiente. Explicarla paso a paso. Utilice diagramas para representarla.
+\end{tcolorbox}
+
+\subfile{src/resolP1_1}
+
+\filbreak
+\subsection{Vuelos: Reducción algorítmica}\label{sec:parte1_2}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P1.2]
+    Plantear la solución como si fuese una reducción de problema.
+    ¿Puede afirmar que corresponde a una reducción polinomial? Justificar
+\end{tcolorbox}
+
+\subfile{src/resolP1_2}
+
+\filbreak\subsection{Vuelos: Optimalidad}\label{sec:parte1_3}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P1.3]
+    ¿Podría asegurar que su solución es óptima?
+\end{tcolorbox}
+
+\subfile{src/resolP1_3}
+
+\newpage\subsection{Vuelos: Programa}\label{sec:parte1_4}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P1.4]
+    Programe la solución
+\end{tcolorbox}
+
+\subfile{src/resolP1_4}
+
+newpage\subsection{Vuelos: Complejidad}\label{sec:parte1_5}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P1.5]
+    Compare la complejidad temporal y espacial de su solución programada con la teórica.
+    ¿Es la misma o difiere?
+\end{tcolorbox}
+
+\subfile{src/resolP1_5}
+
+
+
+
+\setcounter{section}{1}%
+\renewcommand{\thesection}{P\arabic{section}}%
+
+\newpage\section{Parte 2: Equipos de socorro}\label{sec:parte2}
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\alph{subsection}}%
+
+\subsection{Enunciado}
+El sistema ferroviario de un país cubre un gran conjunto de su territorio. El mismo permite realizar diferentes viajes con transbordos entre distintos ramales y subramales que pasan por sus principales ciudades. Dentro de su proceso de mejoramiento del servicio buscan que ante una emergencia en una estación se pueda llegar de forma veloz y eficiente. Consideran que eso se lograría si el equipo de socorro se encuentra en esa misma estación o en el peor de los casos en una estación vecina (que tenga una trayecto directo que no requiere pasar por otras estaciones). Como los recursos son escasos desean establecer la menor cantidad de equipos posibles (un máximo de k equipos pueden solventar). Se solicita nuestra colaboración para dar con una respuesta a este problema.
+
+\noindent Se pide:
+\begin{enumerate}
+    \item Utilizar el problema conocido como “set dominante” para demostrar que corresponde a un problema NP-Completo.
+    \item Asimismo demostrar que el problema set dominante corresponde a un problema NP-Completo.
+    \item Con lo que demostró responda: ¿Es posible resolver de forma eficiente (de forma “tratable”) el problema planteado?
+\end{enumerate}
+
+HINT: podría ser una buena idea utilizar 3SAT o VERTEX COVER.
+
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\arabic{subsection}}%
+
+\newpage\subsection{Socorro: NP-Completo}\label{sec:parte2_1}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P2.1]
+    Utilizar el problema conocido como “set dominante” para demostrar
+    que corresponde a un problema NP-Completo.
+\end{tcolorbox}
+
+\subfile{src/resolP2_1}
+
+\newpage\subsection{Set-dominante: NP-Completo}\label{sec:parte2_2}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P2.2]
+    Asimismo demostrar que el problema set dominante corresponde a un problema NP-Completo.
+\end{tcolorbox}
+
+\subfile{src/resolP2_2}
+
+\newpage\subsection{Tratabilidad}\label{sec:parte2_3}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P2.2]
+    Con lo que demostró responda: ¿Es posible resolver de forma eficiente
+    (de forma “tratable”) el problema planteado?
+\end{tcolorbox}
+
+\subfile{src/resolP2_3}
+
+
+
+\setcounter{section}{2}%
+\renewcommand{\thesection}{P\arabic{section}}%
+
+\newpage\section{Parte 3: Un poco de teoría}\label{sec:parte3}
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\alph{subsection}}%
+
+\subsection{Enunciado}
+\begin{enumerate}
+    \item Defina y explique qué es una reducción polinomial y para qué se utiliza.
+    \item Explique detalladamente la importancia teórica de los problemas NP-Completos.
+    \item Tenemos un problema A, un problema B y una caja negra NA y NB que resuelven el
+        problema A y B respectivamente. Sabiendo que B es P.\begin{enumerate}
+            \item Qué podemos decir de A si utilizamos NA para resolver el problema B (asumimos que la reducción realizada para adaptar el problema B al problema A es polinomial)
+            \item Qué podemos decir de A si utilizamos NB para resolver el problema A (asumimos que la reducción realizada para adaptar el problema A al problema B es polinomial)
+            \item ¿Qué pasa con los puntos anteriores si no conocemos la complejidad de B, pero sabemos que A es NP-C?
+        \end{enumerate}
+\end{enumerate}
+
+
+
+
+\setcounter{subsection}{0}%
+\renewcommand{\thesubsection}{\arabic{subsection}}%
+
+\newpage\subsection{Socorro: NP-Completo}\label{sec:parte3_1}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.1]
+\end{tcolorbox}
+
+\subfile{src/resolP3_1}
+
+\newpage\subsection{Set-dominante: NP-Completo}\label{sec:parte3_2}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.2]
+\end{tcolorbox}
+
+\subfile{src/resolP3_2}
+
+\newpage\subsection{Tratabilidad}\label{sec:parte3_3}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Enunciado P3.2]
+\end{tcolorbox}
+
+\subfile{src/resolP3_3}
+
+
+
+% FIN DEL DOCUMENTO
+% NO BORRAR POR ACCIDENTE NI ESCRIBIR COSSA ABAJO
+\end{document}
