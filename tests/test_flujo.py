@@ -163,7 +163,7 @@ class TestGrafoSimple(unittest.TestCase):
             (4,1,5), (4,3,0), (4,5,0), (5,4, 5)
         ])
 
-    def test_diapo3(self):
+    def test_diapo3_flujo_maximo(self):
         grafo = GrafoSimple()
         grafo.insertarArcoConAlias("a","b", 5)
         grafo.insertarArcoConAlias("c","b", 5)
@@ -182,10 +182,79 @@ class TestGrafoSimple(unittest.TestCase):
 
         flujo = Flujo(grafo)
         fmax = flujo.edmonds(id_s,id_t)
-        corte = [(desde,hasta) for (desde,hasta,arco) in grafo.arcos if not arco.es_directo() and 0 == arco.valor()]
-        corte.sort()
-        print(corte)
         self.assertEqual(fmax,18)
+
+    def test_diapo3_subconjunto_A(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("a","b", 5)
+        grafo.insertarArcoConAlias("c","b", 5)
+        grafo.insertarArcoConAlias("a","d",10)
+        grafo.insertarArcoConAlias("d","c", 2)
+        grafo.insertarArcoConAlias("d","e",10)
+        grafo.insertarArcoConAlias("c","f", 8)
+        grafo.insertarArcoConAlias("f","g", 9)
+        grafo.insertarArcoConAlias("s","a", 5)
+        grafo.insertarArcoConAlias("s","c",20)
+        grafo.insertarArcoConAlias("b","t", 5)
+        grafo.insertarArcoConAlias("e","t",10)
+        grafo.insertarArcoConAlias("g","t", 8)
+        id_s = grafo.idDeNodoAlias("s")
+        id_t = grafo.idDeNodoAlias("t")
+
+        flujo = Flujo(grafo)
+        fmax = flujo.edmonds(id_s,id_t)
+        A, corte, B = flujo.corte_actual(id_s)
+        A  = [grafo.alias(id=a) for a in A]
+        A.sort()
+        self.assertEqual(A,['c', 's'])
+
+    def test_diapo3_subconjunto_B(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("a","b", 5)
+        grafo.insertarArcoConAlias("c","b", 5)
+        grafo.insertarArcoConAlias("a","d",10)
+        grafo.insertarArcoConAlias("d","c", 2)
+        grafo.insertarArcoConAlias("d","e",10)
+        grafo.insertarArcoConAlias("c","f", 8)
+        grafo.insertarArcoConAlias("f","g", 9)
+        grafo.insertarArcoConAlias("s","a", 5)
+        grafo.insertarArcoConAlias("s","c",20)
+        grafo.insertarArcoConAlias("b","t", 5)
+        grafo.insertarArcoConAlias("e","t",10)
+        grafo.insertarArcoConAlias("g","t", 8)
+        id_s = grafo.idDeNodoAlias("s")
+        id_t = grafo.idDeNodoAlias("t")
+
+        flujo = Flujo(grafo)
+        fmax = flujo.edmonds(id_s,id_t)
+        A, corte, B = flujo.corte_actual(id_s)
+        B  = [grafo.alias(id=b) for b in B]
+        B.sort()
+        self.assertEqual(B,['a','b', 'd','e','f','g','t'])
+
+    def test_diapo3_corte(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("a","b", 5)
+        grafo.insertarArcoConAlias("c","b", 5)
+        grafo.insertarArcoConAlias("a","d",10)
+        grafo.insertarArcoConAlias("d","c", 2)
+        grafo.insertarArcoConAlias("d","e",10)
+        grafo.insertarArcoConAlias("c","f", 8)
+        grafo.insertarArcoConAlias("f","g", 9)
+        grafo.insertarArcoConAlias("s","a", 5)
+        grafo.insertarArcoConAlias("s","c",20)
+        grafo.insertarArcoConAlias("b","t", 5)
+        grafo.insertarArcoConAlias("e","t",10)
+        grafo.insertarArcoConAlias("g","t", 8)
+        id_s = grafo.idDeNodoAlias("s")
+        id_t = grafo.idDeNodoAlias("t")
+
+        flujo = Flujo(grafo)
+        fmax = flujo.edmonds(id_s,id_t)
+        A, corte, B = flujo.corte_actual(id_s)
+        corte  = [(grafo.alias(id=u),grafo.alias(id=v)) for (u,v) in corte]
+        corte.sort()
+        self.assertEqual(corte,[('c','b'), ('c','f'), ('s', 'a')])
 
 
 if __name__ == '__main__':

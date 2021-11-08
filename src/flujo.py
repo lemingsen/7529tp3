@@ -84,3 +84,23 @@ class Flujo:
             if(len(aumentable)<1):
                 return suma
             suma += self.aumentar(desde,aumentable)
+    
+    def corte_actual(self,fuente):
+        A = set()
+        B = set(range(self.grafo.cantidadNodos()))
+        corte = set()
+        siguientes = [fuente]
+        while len(siguientes) > 0:
+            actual = siguientes.pop(0)
+            A.add(actual)
+            B.remove(actual)
+            arcos_gen = self.grafo.arcoDesdeNodoId(actual)
+            for u,arco in arcos_gen:
+                if not arco.es_directo():
+                    pass
+                elif 0 == arco.valor():
+                    corte.add( (actual,u) )
+                elif u not in A:
+                        siguientes.append(u)
+                        A.add(u)
+        return A, corte, B
