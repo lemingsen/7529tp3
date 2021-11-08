@@ -17,5 +17,8 @@ class TestArcoDirecto(unittest.TestCase):
         self.assertEqual(arco1.valor(),0)
         self.assertEqual(arco2.valor(),2)
 
+    def test_valor_recien_creado_supera_capacidad(self):
+        self.assertRaises(Exception,ArcoDirecto,10,11)
+
 if __name__ == '__main__':
     unittest.main()
