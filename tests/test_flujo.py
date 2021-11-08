@@ -21,5 +21,44 @@ class TestGrafoSimple(unittest.TestCase):
         self.assertEqual(2,grafo.cantidadArcos())
         self.assertEqual(2,len(list(grafo.arcos())))
 
+    def test_AB2AC3_cantidad_arcos(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",2)
+        grafo.insertarArcoConAlias("A","C",3)
+        Flujo.convertir(grafo)
+        desde0 = list(grafo.arcoDesdeNodoId(0))
+        desde1 = list(grafo.arcoDesdeNodoId(1))
+        desde2 = list(grafo.arcoDesdeNodoId(2))
+
+        self.assertEqual(len(desde0), 2)
+        self.assertEqual(len(desde1), 1)
+        self.assertEqual(len(desde2), 1)
+        self.assertEqual(4,grafo.cantidadArcos())
+        self.assertEqual(3,grafo.cantidadNodos())
+
+    def test_AB2AC3_arcos_orden(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",2)
+        grafo.insertarArcoConAlias("A","C",3)
+        Flujo.convertir(grafo)
+        AB, AC = list(grafo.arcoDesdeNodoId(0))
+        BA = list(grafo.arcoDesdeNodoId(1))[0]
+        CA = list(grafo.arcoDesdeNodoId(2))[0]
+        self.assertEqual(  AB[0], 1 )
+        self.assertEqual(  AC[0], 2 )
+        self.assertEqual(  BA[0], 0 )
+        self.assertEqual(  CA[0], 0 )
+
+    def test_AB2AC3_arcos_inversos(self):
+        grafo = GrafoSimple()
+        grafo.insertarArcoConAlias("A","B",2)
+        grafo.insertarArcoConAlias("A","C",3)
+        Flujo.convertir(grafo)
+        AB, AC = list(grafo.arcoDesdeNodoId(0))
+        BA = list(grafo.arcoDesdeNodoId(1))[0]
+        CA = list(grafo.arcoDesdeNodoId(2))[0]
+        self.assertIs(AB[1].inverso(), BA[1])
+        self.assertIs(AC[1].inverso(), CA[1])
+
 if __name__ == '__main__':
     unittest.main()
