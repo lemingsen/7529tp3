@@ -66,11 +66,11 @@ class TestVuelos(unittest.TestCase):
     def test_AB10_AB(self):
         rutaArchivo = self.pathArchivo("entradas/test_AB10_AB.txt")
         out = self.ejecutar([rutaArchivo])
-        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"rigen:\s*A",txt)))
-        self.assertTrue(self.lineaCumple(out, lambda txt: "stino:\tB" in txt))
-        self.assertTrue(self.lineaCumple(out, lambda txt: "asajeros:\t10" in txt))
-        self.assertTrue(self.lineaCumple(out, lambda txt: "uelos:\t1" in txt))
-        self.assertTrue(self.lineaCumple(out, lambda txt: re.match(r"\s*A\s+B",txt)))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"rigen:\s*A", txt)))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"stino:\tB",  txt)))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"jeros:\t10", txt)))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"uelos:\t1",  txt)))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"\s*A\s+B",txt)))
 
 if __name__ == '__main__':
     unittest.main()
