@@ -1,0 +1,12 @@
+\documentclass{standalone}
+\begin{document}
+\begin{tabular}{@{}rlc@{}}
+    \multicolumn{3}{c}{Integrantes del grupo 404}                                 \\ \midrule
+    \textbf{Padrón} & \textbf{Apellido, Nombre}           & \textbf{Email}        \\ \midrule
+    76187           & Xxxxxxxxxx, Xxxxx Xxxxx     & xxxxxxxxxxx@fi.uba.ar \\
+    97529           & Xxxxxxxx, Xxxxx Xxxxxxx     & xxxxxxxxx@fi.uba.ar   \\
+    102593          & Xxxxxx, Xxxxx Xxxxx         & xxxxxxx@fi.uba.ar     \\
+    102649          & Xxxxxx, Xxxxxxx Xxxxx       & xxxxxxx@fi.uba.ar     \\
+    106713          & Xxxx Xxxxx, Xxxxx           & xxxxx@fi.uba.ar      \\ \bottomrule
+    \end{tabular}
+\end{document}
