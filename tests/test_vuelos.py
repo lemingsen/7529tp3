@@ -66,7 +66,7 @@ class TestVuelos(unittest.TestCase):
     def test_AB10_AB(self):
         rutaArchivo = self.pathArchivo("entradas/test_AB10_AB.txt")
         out = self.ejecutar([rutaArchivo])
-        self.assertTrue(self.lineaCumple(out, lambda txt: "rigen: \tA" in txt,verbose=True))
+        self.assertTrue(self.lineaCumple(out, lambda txt: re.search(r"rigen:\s*A",txt)))
         self.assertTrue(self.lineaCumple(out, lambda txt: "stino:\tB" in txt))
         self.assertTrue(self.lineaCumple(out, lambda txt: "asajeros:\t10" in txt))
         self.assertTrue(self.lineaCumple(out, lambda txt: "uelos:\t1" in txt))
