@@ -4,18 +4,23 @@
 
 \begin{document}
 
-El problema de situar los equipos de socorro revuelve en torno a el alcance de estos con respecto al conjunto de las estaciones. Se busca que k equipos de emergencia alcancen para que toda estación esté cubierta. Dado que un equipo sólo puede interactuar con su estación o las adyacentes a esta, el problema resulta ser una variante del problema “determinar set dominante”. En este caso, este problema está restringido a determinar un set dominante S con hasta k elementos.
+El problema de situar los equipos de socorro revuelve en torno a el alcance de estos con respecto
+al conjunto de las estaciones. Se busca que k equipos de emergencia alcancen para que toda estación
+esté cubierta. Dado que un equipo sólo puede interactuar con su estación o las adyacentes a esta,
+el problema resulta ser una variante del problema \textquote{determinar set dominante}.
+En este caso, este problema está restringido a determinar un set dominante $S$ con hasta $k$ elementos.
 
 \textquote{Un "set dominante" S de un grafo G es un subconjunto de vértices de dicho grafo,
 tales que cada vértice del grafo que no se encuentre en el subconjunto S, es adyacente a aquellos que sí.}
 \footnote{Wayne Goddard, Michael A. Henning. «Independent domination in graphs: A survey and recent results». Discrete Mathematics, Volume 313, Issue 7, 2013, pág. 839-854,
 ISSN 0012-365X, https://doi.org/10.1016/j.disc.2012.11.031}
 
-El algoritmo solucionador, a grosso modo, debe determinar un set dominante S, de límite de tamaño k,
-el cual resulte ser el posicionamiento preferible de los equipos de socorro. El problema de
-\textquote{hallar set dominante} fue probado NP-Completo (consecuencia de que Richard M. Karp determinó
-que \textquote{set cover problem} es NP-Completo, ocasionada debido a que toda instancia de
-dominating set [“hallar set dominante”] es reducible a una de set cover problem y viceversa).
+El algoritmo solucionador, a \emph{grosso modo}, debe determinar un set dominante $S$,
+de límite de tamaño $k$, el cual resulte ser el posicionamiento preferible de los equipos de socorro.
+El problema de \textquote{hallar set dominante} fue probado NP-Completo
+(consecuencia de que Richard M. Karp determinó que \textquote{set cover problem} es NP-Completo,
+ocasionada debido a que toda instancia de dominating set [“hallar set dominante”] es reducible a una
+de set cover problem y viceversa).
 Por lo tanto, y siendo que el algoritmo es básicamente una solución del problema “hallar set dominante”,
 el problema de ubicar los equipos de socorro es NP-Completo.
 
