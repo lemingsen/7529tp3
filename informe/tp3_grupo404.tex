@@ -53,6 +53,12 @@
   \endflushleft
 }
 
+\newcommand{\ChangeLine}[1]{%
+\ifodd\value{FancyVerbLine}%
+\textcolor{gray}{#1}\else\textcolor{black}{#1}\fi}
+
+\DefineVerbatimEnvironment{alternate}{Verbatim}{formatcom=\renewcommand{\FancyVerbFormatLine}{\ChangeLine}}{}
+
 \begin{document}
 \begin{titlepage} % Carátula
 	\hfill\includegraphics[width=6cm]{img/logofiuba.jpg}
