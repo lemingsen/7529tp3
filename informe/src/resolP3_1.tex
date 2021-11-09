@@ -4,19 +4,26 @@
 
 \begin{document}
 
-Una reducción polinomial es un procedimiento por el cual se transforma una instancia de un problema
-cuya solución no es conocida en otra instancia de un problema el cual si se sabe resolver.
-Luego se transforma la solución obtenida para el problema conocido en una solución para el problema
-original.
+Una \textbf{reducción algorítmica} es un procedimiento por el cual se transforma una instancia
+de un problema original (o \emph{reducible}), en otra instancia de otro problema (\emph{reducido})
+que puede resolverse por un algoritmo dado (a modo de \textquote{caja negra}).
+Y luego se transforma la solución obtenida en una solución del problema original.
 
-Si las transformaciones se realizan en tiempo polinomial, entonces es una reducción polinomial.
+Eso puede llevarse a cabo porque:
+\begin{itemize}
+    \item No se sabe resolver el problema original y sí el reducido.
+    \item Se conoce un algoritmo para resolver el problema original,
+        pero el algoritmo para reducir el problema reducido tiene
+        una menor complejidad.
+\end{itemize}
 
-Notación: Dados los problemas X e Y, se dice $Y \leq_p X$ si Y es polinomialmente reducible a X.
-La reducción polinomial puede utilizarse como \textquote{caja negra} para resolver problemas
-cuya solución es desconocida. También como medida de complejidad en el caso de saber la
-complejidad de alguno de los problemas.
-Si $Y \leq_p X$, entonces podemos decir que X es \textquote{al menos tan difícil de resolver} que Y.
+Cuando estas transformaciones se realizan en tiempo polinomial,
+entonces decimos que es una \textbf{reducción polinomial}.
 
+La reducción polinomial también es de utilidad como \textbf{medida de complejidad} en el caso de
+saber la complejidad de alguno de los problemas. Por ejemplo, dados los problemas $X$ e $Y$,
+se dice $Y \leq_p X$ si $Y$ es polinomialmente reducible a $X$. Entonces, si $Y \leq_p X$,
+entonces podemos decir que $X$ es \underline{al menos} tan difícil de resolver que $Y$.
 
 % FIN DEL DOCUMENTO (SECCIÓN P3.1)
 % NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO
