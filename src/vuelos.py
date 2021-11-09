@@ -15,7 +15,7 @@ class Vuelos:
 
     def imprimir(self):
         """Imprime el resultado."""
-        print("Origen:\t"+self.lector.desde)
+        print("Origen: \t"+self.lector.desde)
         print("Destino:\t"+self.lector.hasta)
         print("Máx. pasajeros:\t"+str(self.pasajeros))
         print("Cant. vuelos:\t"+str(len(self.corte)))
