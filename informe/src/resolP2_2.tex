@@ -11,18 +11,18 @@ es NP y también NP-Hard.
 sus vértices adyacentes y comprobar que todos los vértices del grafo fueron marcados.
 Un algoritmo que certifica el problema podría ser:
 
-\begin{alternate}
-def es_set_dominante(grafo, set):
-visitados = []
-for vertices in set:
-    if vertice not in visitados:
-        visitados.append(vertice)
-    for v_adyacente in vertice:
-        if v_adyacente not in visitados:
-            visitados.append(v_adyacente)
-if len(visitados) == len(grafo):
-    return true
-return false
+\begin{alternate}[breaklines=true,numbers=left,xleftmargin=5mm]
+    def es_set_dominante(grafo, set):
+    visitados = []
+    for vertices in set:
+        if vertice not in visitados:
+            visitados.append(vertice)
+        for v_adyacente in vertice:
+            if v_adyacente not in visitados:
+                visitados.append(v_adyacente)
+    if len(visitados) == len(grafo):
+        return true
+    return false
 \end{alternate}
 
 Su complejidad es de$ O(n2)$ y por lo tanto puedo decir que es un certificador eficiente.
