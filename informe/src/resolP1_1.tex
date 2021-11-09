@@ -13,6 +13,8 @@ y solucionarlo con el algoritmo de Edmonds-Karp.
     \caption{\label{reduc}Reducción del problema, todas las operaciones son polinómicas.}
 \end{figure}
 
+\subsubsection{Pasos generales}
+
 En resumen, la solución completa sigue los siguientes pasos:
 \begin{enumerate}
     \item Procesar el archivo en el formato dado a un grafo dirigido, utilizando lista de adyacencias.
@@ -56,6 +58,87 @@ En resumen, la solución completa sigue los siguientes pasos:
     y el conjunto de arcos \texttt{corte} como los vuelos que cumplen con el criterio dado.
 \end{enumerate}
 
+\subsubsection{Ejemplo}
+Tomaremos como ejemplo el archivo disponible en
+\texttt{tests/entradas/test\_ejtp3.txt}. En la línea 1 y 2 tenemos el origen y
+destino (respectivamente) de los pasajeros a los que apunta la campaña.
+Y a continuación, en el epígrafe de cada figura, iremos desarrollando el ejemplo.
+
+\begin{alternate}[breaklines=true,numbers=left,xleftmargin=5mm]
+    BHI
+    MDZ
+    AEP,MDZ,10
+    BHI,MDQ,20
+    BHI,NQN,11
+    EZE,AEP,15
+    MDQ,EZE,18
+    NQN,AEP,11
+    NQN,ROS,12
+    ROS,MDZ,10
+\end{alternate}
+
+\begin{figure}[H]
+    \centering
+    \subcaptionbox
+        {\label{fig:Vuelos1}\textbf{Grafo inicial con vuelos y sus capacidades}}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA1.png}}
+    \subcaptionbox
+        {\label{fig:Vuelos2}\textbf{Conversión a grafo residual de flujo}, inicialmente flujo 0
+        (flecha intermitente) y residuo disponible igual a su capacidad (felcha sólida).}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA2.png}}
+\end{figure}
+\begin{figure}[H]
+    %\ContinuedFloat
+    \centering
+    \subcaptionbox
+        {\label{fig:Vuelos3}\textbf{BFS:} Hay varios caminos disponibles, puntualmente 2 mínimos (rojo y azul).
+        Tomaremos el rojo con un cuello de botella de 10.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA3.png}}
+    \subcaptionbox
+        {\label{fig:Vuelos4}\textbf{Aumentar:} A cada arco en sentido del camino se le resta el cuello (10, en ),
+        y a cada arco en sentido contrario se le suma (manteniéndose la capacidad). El flujo total queda en 10.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA4.png}}
+    \end{figure}
+    \begin{figure}[H]
+        %\ContinuedFloat
+    \centering
+    \subcaptionbox
+        {\label{fig:Vuelos5}\textbf{BFS:} El siguiente camino mínimo es el indicado en rojo. El camino anterior
+        ya no está disponible porque tiene al menos un arco ($AEP\rightarrow MDZ$) en 0. Siendo camino directo
+        significa que no hay residuo, está saturado. El cuello de botella es 1 ($BHI\rightarrow NQN$).}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA5.png}}
+    \subcaptionbox
+        {\label{fig:Vuelos6}\textbf{Aumentar:} Se vuelven a actualizar los valores. Ahora el flujo total queda en 11,
+        al sumarle a los 10 anteriores, el último cuello. El arco que era cuello de botella queda en 0.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA6.png}}
+    \end{figure}
+    \begin{figure}[H]
+    %\ContinuedFloat
+        \centering
+    \subcaptionbox
+        {\label{fig:Vuelos7}\textbf{BFS:} Como ahora $BHI\rightarrow NQN$ quedó saturado, el único camino disponible es
+        el indicado en rojo. El cuello son los 9 de $ROS\rightarrow MDZ$.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA7.png}}
+    \subcaptionbox
+        {\label{fig:Vuelos8}\textbf{Aumentar:} Una vez actualizado en 9, también aumenta el flujo total en la misma cantidad
+        llegando a 20. Aumentar el camnino de reversa implicó que 9 que llegaban a AEP por NQN ahora lo hacen por EZE; quedando
+        esos 9 disponibles para ir a ROS.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA8.png}}
+    \end{figure}
+    \begin{figure}[H]
+    %\ContinuedFloat
+    \centering
+    \subcaptionbox
+        {\label{fig:Vuelos9}\textbf{Subgrupos y corte:} En azul nodos del subgrupo A (y los arcos por los que llegó).
+        En verde el resto de los nodos, que quedan en subgrupo B. En rojo los arcos saturados que pertenecen al corte,
+        y en bordó otros arcos saturados que pertenecen a un subgrupo.}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA9.png}}
+    \subcaptionbox
+        {\label{fig:Vuelos10}\textbf{Reconversión:} Una vez resuelta la instancia como un problema de flujo, se convierte
+        nuevamente en una instancia del problema original. En rojo los vuelos seleccionados, y la cantidad
+        de pasajeros máxima es 20 (lo que era el flujo máximo).}
+        {\includegraphics[width=0.4\linewidth,angle=0,origin=c]{out/ejA10.png}}
+\end{figure}
 
 % FIN DEL DOCUMENTO (SECCIÓN P1.1)
 % NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO
