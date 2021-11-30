@@ -1,0 +1,51 @@
+\documentclass[../tp3_grupo404.tex]{subfiles}
+
+\graphicspath{{\subfix{../out/}}}
+
+\begin{document}
+
+El problema enunciado consiste en en encontrar el número de equipos de socorro necesarios en las estaciones 
+ferroviarias de los distintos ramales y subramales de la red ferroviaria de un país de manera tal que ante 
+una emergencia en una estación haya un equipo de socorro en dicha estación, o en el peor de los casos en 
+una estación vecina que tenga un trayecto directo entre ellas dos. Además el número de equipos mínimo 
+necesario debe ser menor a $k$.
+
+Analizando todo esto, se puede ver que la red ferroviaria formará un grafo no dirigido, en el que cada 
+vértice será una estación y las aristas serán los caminos entre estaciones. Este grafo probablemente 
+será disconexo, ya que no necesariamente haya comunicación entre todos los ramales.
+
+Por ende, si representamos la red ferroviaria como un grafo no dirigido $G(V,E)$ nuestro problema 
+consistirá en encontrar el menor conjunto de vértices (estaciones) $V'$ de tamaño $k'$ de manera tal 
+que cualquier vértice de $V$ pertenezca a $V'$ o en su defecto sea adyacente a al menos un vértice que 
+pertenezca a $V'$. Además se debe cumplir con que $k'$ sea menor a $k$.
+
+Un set dominante en un grafo no dirigido $G(V,E)$ es un subconjunto de vértices $V'$ tal que cada vértice 
+en el grafo pertenece a $V'$ o es adyacente a algún vértice en $V'$. Dado un grafo $G$ y un número entero $k$, 
+el problema consiste en encontrar un set dominante de tamaño $k$ para un grafo dado $G$. El número 
+dominante $\gamma(G)$ es el cardinal del menor conjunto dominante de $G$.
+
+Por ende, en nuestro problema nos están pidiendo el número dominante $\gamma(G)$ para un problema de set 
+dominante y que este sea menor a $k$. 
+
+\begin{itemize}
+    \item Dado $G=(V,E)$:
+    \item Donde $k$ tamaño máximo del conjunto dominante
+    \item $T$ certificado = subconjunto de nodos de $V$
+    \item Y puedo verificar en tiempo polinomial:
+
+    Si $(T \leqslant k 	\land (	\forall v \in V, v \in T \lor {v,w} / w  \in T)) \implies \in NP$
+\end{itemize}
+
+
+
+
+
+
+
+
+Si probamos que el problema de set dominante es $NP-Completo$ quedará demostrado entonces que este problema también lo es.
+
+
+% FIN DEL DOCUMENTO (SECCIÓN Reentrega P2.1)
+% NO BORRAR POR ACCIDENTE NI ESCRIBIR COSAS ABAJO
+\end{document}
